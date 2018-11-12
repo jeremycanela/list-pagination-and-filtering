@@ -14,6 +14,8 @@ let totalStudents = studentLI.length;
 const itemsPerPage = 10;
 let pageStartIndex;
 let pageEndIndex;
+let errorMsgContainer = document.createElement("div");
+let errorMsg = document.createElement("p");
 
 // Resets student list indexes to corresponding page
 function setIndexes() {
@@ -33,6 +35,7 @@ function hideAllStudents() {
     displayed list
 */
 function showPage(pageStartIndex, pageEndIndex, studentArray, studentArrayLength) {
+  errorMsgContainer.innerHTML = "";
   hideAllStudents();
   
   if(pageEndIndex <= studentArrayLength) {
@@ -95,11 +98,12 @@ function appendLinks(studentArray) {
 
 // The `appendSearchForm` function appends the search form along with its functionability
 function appendSearchForm() {
+  // Display error message when user is not found
   function displayError() {
-    studentUL.innerHTML = "";
-    let errorMsg = document.createElement("p");
+    errorMsgContainer.innerHTML = "";
     errorMsg.textContent = "No results were found.";
-    studentUL.appendChild(errorMsg);
+    errorMsgContainer.appendChild(errorMsg);
+    studentUL.appendChild(errorMsgContainer);
   }
   const searchForm = document.createElement("form");
   const input = document.createElement("input");
