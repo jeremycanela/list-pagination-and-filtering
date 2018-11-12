@@ -95,6 +95,12 @@ function appendLinks(studentArray) {
 
 // The `appendSearchForm` function appends the search form along with its functionability
 function appendSearchForm() {
+  function displayError() {
+    studentUL.innerHTML = "";
+    let errorMsg = document.createElement("p");
+    errorMsg.textContent = "No results were found.";
+    studentUL.appendChild(errorMsg);
+  }
   const searchForm = document.createElement("form");
   const input = document.createElement("input");
   const button = document.createElement("button");
@@ -131,6 +137,10 @@ function appendSearchForm() {
     currentPage = 0;
     showPage(pageStartIndex, pageEndIndex, searchResults, searchResults.length);
     appendLinks(searchResults);
+
+    if(searchResults == "") {
+      displayError();
+    }
   });
 }
 
